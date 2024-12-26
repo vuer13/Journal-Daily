@@ -9,7 +9,11 @@ const NavBar = () => {
         </h1>
         <div className='links'>
             <a href="/">Home</a>
-            <a href="/create">Create New Entry</a>
+            <a href="/create" style = {{
+                color : 'white',
+                backgroundColor: 'blue',
+                borderRadius: '8px'
+            }}>Create New Entry</a>
             <a href="/logoff">Sign out</a>
         </div>
     </nav>
