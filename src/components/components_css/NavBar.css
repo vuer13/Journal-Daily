@@ -14,9 +14,11 @@ nav {
 }
 .nav h1 {
     color: rgb(21, 50, 146);
+    vertical-align: middle;
 }
 .nav .links {
     margin-left: auto;
+    vertical-align: middle;
 }
 .nav a {
     margin-left: 16px;
