@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
 import "./components_css/NavBar.css";
 
 const NavBar = () => {
@@ -8,13 +9,13 @@ const NavBar = () => {
             The Journal App
         </h1>
         <div className='links'>
-            <a href="/">Home</a>
-            <a href="/create" style = {{
+            <Link to="/">Home</Link>
+            <Link to="/create" style = {{
                 color : 'white',
                 backgroundColor: 'blue',
                 borderRadius: '8px'
-            }}>Create New Entry</a>
-            <a href="/logoff">Sign out</a>
+            }}>Create New Entry</Link>
+            <Link to="/logoff">Sign out</Link>
         </div>
     </nav>
   )
