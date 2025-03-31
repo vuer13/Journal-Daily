@@ -17,9 +17,33 @@ const Entry = () => {
     const [entry, setEntry] = useState('');
     const [rating, setRating] = useState(0);
     const [sentence, setSentence] = useState('');
+    const [error, setError] = useState(null);
 
-    const submit = (e) => {
-        const entry = { title, entry, rating, sentence }
+    const submit = async (e) => {
+        e.preventDefault();
+
+        const journalEntry = { title, entry, rating, sentence }
+
+        const response = await fetch('/api/journals', {
+            method: "POST",
+            body: JSON.stringify(journalEntry),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const json = await response.json()
+
+        if (!response.ok) {
+            setError(json.error)
+        }
+        if (response.ok) {
+            setTitle('')
+            setEntry('')
+            setRating(0)
+            setSentence('')
+            setError(null)
+            console.log("new journal added", json)
+        }
     }
 
     return (
@@ -65,6 +89,7 @@ const Entry = () => {
                         onChange={(e) => setSentence(e.target.value)}
                     /> <br></br>
                     <input type="submit" class='submit' value='Submit Entry' />
+
                 </form>
             </div>
         </div>

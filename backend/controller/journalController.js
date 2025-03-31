@@ -22,20 +22,29 @@ const getOneJournal = async(req, res) => {
         return res.status(404).json({mssg: "No such journal"})
     }
 
-    res.status(200).json(workout)
+    res.status(200).json(journal)
 }
 
 // create new journal
-const createJournal = async(req, res) => {
-    const { title, enter, rating, sum } = req.body
+const createJournal = async (req, res) => {
+    const { title, entry, rating, sentence } = req.body;
 
     try {
-        const entry = await journals.create({ title, enter, rating, sum });
-        res.status(200).json(entry);
+        // Create new journal entry
+        const journalEntry = await journals.create({
+            title,
+            entry,     
+            rating,
+            sentence 
+        });
+
+        // Send a successful response
+        res.status(200).json(journalEntry);
     } catch (error) {
-        res.status(400).json({ error: error.message })
+        // Send an error response if something goes wrong
+        res.status(400).json({ error: error.message });
     }
-}
+};
 
 // delete a entry
 const deleteJournal = async(req, res) => {
@@ -51,7 +60,7 @@ const deleteJournal = async(req, res) => {
         return res.status(404).json({mssg: "No such journal"})
     }
 
-    res.status(200).json(workout)
+    res.status(200).json(journal)
 }
 
 // update journal
@@ -70,11 +79,11 @@ const updateJournal = async(req, res) => {
         return res.status(404).json({mssg: "No such journal"})
     }
 
-    res.status(200).json(workout)
+    res.status(200).json(journal)
 }
 
 
-module.export = {
+module.exports = {
     getAllJournals,
     getOneJournal,
     createJournal,
