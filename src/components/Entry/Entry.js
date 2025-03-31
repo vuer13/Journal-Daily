@@ -21,18 +21,19 @@ const Entry = () => {
 
     const submit = async (e) => {
         e.preventDefault();
-
+    
         const journalEntry = { title, entry, rating, sentence }
-
-        const response = await fetch('/api/journals', {
+    
+        const response = await fetch('http://localhost:4000/api/journals', {
             method: "POST",
             body: JSON.stringify(journalEntry),
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-        const json = await response.json()
-
+    
+        const json = await response.json(); 
+    
         if (!response.ok) {
             setError(json.error)
         }

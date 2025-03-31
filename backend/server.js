@@ -3,9 +3,16 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes/routes.js')
+const cors = require('cors');
 
 // express app
 const app = express();
+
+app.use(cors({
+    origin: 'http://localhost:3000', // Allow React app running on port 3000 to access backend
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+}));
 
 app.use(express.json());
 app.use('/api/journals', routes);

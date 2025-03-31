@@ -5,23 +5,15 @@ const {
     createJournal,
     deleteJournal,
     updateJournal
-} = require('../controller/journalController')
+} = require('../controller/journalController');
 
 const router = express.Router();
 
-// get all the journals
-router.get('/', getAllJournals);
-
-// get one journal
-router.get('/:id', getOneJournal);
-
-// post new journal
-router.post('/create', createJournal);
-
-// delete entry
-router.delete('/:id', deleteJournal);
-
-// update entry
-router.patch('/:id', updateJournal);
+// Define the routes properly
+router.get('/', getAllJournals);  // GET /api/journals
+router.get('/:id', getOneJournal);  // GET /api/journals/:id
+router.post('/', createJournal);  // POST /api/journals
+router.delete('/:id', deleteJournal);  // DELETE /api/journals/:id
+router.patch('/:id', updateJournal);  // PATCH /api/journals/:id
 
 module.exports = router;
