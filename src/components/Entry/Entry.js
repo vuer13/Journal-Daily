@@ -16,13 +16,13 @@ const Entry = () => {
     const [title, setTitle] = useState('');
     const [entry, setEntry] = useState('');
     const [rating, setRating] = useState(0);
-    const [sentence, setSentence] = useState('');
+    const [summary, setSummary] = useState('');
     const [error, setError] = useState(null);
 
     const submit = async (e) => {
         e.preventDefault();
     
-        const journalEntry = { title, entry, rating, sentence }
+        const journalEntry = { title, entry, rating, summary }
     
         const response = await fetch('http://localhost:4000/api/journals', {
             method: "POST",
@@ -31,6 +31,8 @@ const Entry = () => {
                 'Content-Type': 'application/json'
             }
         });
+
+        console.log("Sending request with data:", JSON.stringify(journalEntry, null, 2));
     
         const json = await response.json(); 
     
@@ -41,7 +43,7 @@ const Entry = () => {
             setTitle('')
             setEntry('')
             setRating(0)
-            setSentence('')
+            setSummary('')
             setError(null)
             console.log("new journal added", json)
         }
@@ -81,13 +83,13 @@ const Entry = () => {
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}
                     /> <br></br>
-                    <label for='sentence'>One Sentence to describe today: </label>
+                    <label for='summary'>One Sentence to describe today: </label>
                     <input type='text'
                         required
-                        id='sentence'
-                        name='sentence'
-                        value={sentence}
-                        onChange={(e) => setSentence(e.target.value)}
+                        id='summary'
+                        name='summary'
+                        value={summary}
+                        onChange={(e) => setSummary(e.target.value)}
                     /> <br></br>
                     <input type="submit" class='submit' value='Submit Entry' />
 

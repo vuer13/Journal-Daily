@@ -9,7 +9,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:3000', // Allow React app running on port 3000 to access backend
+    origin: 'http://localhost:3000', 
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type'],
 }));

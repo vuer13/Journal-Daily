@@ -27,7 +27,7 @@ const getOneJournal = async(req, res) => {
 
 // create new journal
 const createJournal = async (req, res) => {
-    const { title, entry, rating, sentence } = req.body;
+    const { title, entry, rating, summary } = req.body;
 
     try {
         // Create new journal entry
@@ -35,7 +35,7 @@ const createJournal = async (req, res) => {
             title,
             entry,     
             rating,
-            sentence 
+            summary 
         });
 
         // Send a successful response
@@ -43,6 +43,7 @@ const createJournal = async (req, res) => {
     } catch (error) {
         // Send an error response if something goes wrong
         res.status(400).json({ error: error.message });
+        console.log("error here");
     }
 };
 
