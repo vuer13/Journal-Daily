@@ -1,12 +1,15 @@
+import './Home/Home.css'
+
 const Details = ( {journal} ) => {
+
+    const date = new Date(journal.createdAt);
+    const formattedDate = date.toISOString().split('T')[0];
+
     return (
         <div className="details">
-            <h4>
+            <h4 className="title">
                 {journal.title}
             </h4>
-            <p>
-                {journal.enter}
-            </p>
             <p>
                 <strong>
                     Rating: {journal.rating}
@@ -17,8 +20,8 @@ const Details = ( {journal} ) => {
                     Summary: {journal.summary}
                 </strong>
             </p>
-            <p>
-                {journal.createdAt}
+            <p className="end">
+                Created on: {formattedDate}
             </p>
         </div>
     )

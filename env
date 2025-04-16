@@ -1,2 +1,0 @@
-PORT=5000
-MONG_URI=mongodb+srv://ryanvu:pokemon276@cluster0.5yyvo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 

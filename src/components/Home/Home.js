@@ -1,6 +1,7 @@
 import React from 'react'
 import {useEffect, useState} from 'react'
 import JournalDetails from './../Details'
+import './Home.css'
 
 const Home = () => {
 
@@ -21,7 +22,7 @@ const Home = () => {
 
   return (
     <div className='Journals'>
-        {journal && journal.map((entry) => (
+        {journal && journal.map((journal) => (
             <JournalDetails key={journal._id} journal={journal} />
         ))}
     </div>

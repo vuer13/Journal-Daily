@@ -1,0 +1,11 @@
+.details {
+    text-align: left;
+    line-height: 1.5;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.details .end{
+    margin-right: 10px;
+    text-align: right;
+}
