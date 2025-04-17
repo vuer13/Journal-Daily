@@ -1,11 +1,17 @@
-.details {
+.details .main {
     text-align: left;
     line-height: 1.5;
     margin-left: 20px;
     margin-top: 10px;
 }
 
-.details .end{
-    margin-right: 10px;
+.details .right{
     text-align: right;
+    margin-top: 10px;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 20px;
 }
