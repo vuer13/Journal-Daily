@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import "./Entry.css";
+import { useJournalContext } from '../../hooks/useJournalContext';
 
 const Entry = () => {
 
@@ -13,6 +14,8 @@ const Entry = () => {
         setDate(`${m}/${d}/${y}`);
     }, []);
 
+    const { dispatch } = useJournalContext()
+
     const [title, setTitle] = useState('');
     const [entry, setEntry] = useState('');
     const [rating, setRating] = useState(0);
@@ -21,9 +24,9 @@ const Entry = () => {
 
     const submit = async (e) => {
         e.preventDefault();
-    
+
         const journalEntry = { title, entry, rating, summary }
-    
+
         const response = await fetch('http://localhost:4000/api/journals', {
             method: "POST",
             body: JSON.stringify(journalEntry),
@@ -33,9 +36,9 @@ const Entry = () => {
         });
 
         console.log("Sending request with data:", JSON.stringify(journalEntry, null, 2));
-    
-        const json = await response.json(); 
-    
+
+        const json = await response.json();
+
         if (!response.ok) {
             setError(json.error)
         }
@@ -46,6 +49,7 @@ const Entry = () => {
             setSummary('')
             setError(null)
             console.log("new journal added", json)
+            dispatch({ type: 'CREATE_JOURNAL', payload: json })
         }
     }
 

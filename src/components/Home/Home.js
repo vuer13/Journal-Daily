@@ -1,11 +1,12 @@
 import React from 'react'
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import JournalDetails from './../Details'
 import './Home.css'
+import { useJournalContext } from '../../hooks/useJournalContext'
 
 const Home = () => {
 
-    const [journal, setJournal] = useState(null);
+    const {journal, dispatch} = useJournalContext()
 
     useEffect(() => {
         const fetchEntry =  async() => {
@@ -13,7 +14,7 @@ const Home = () => {
             const json = await response.json();
 
             if (response.ok) {
-                setJournal(json);
+                dispatch({type: 'SET_JOURNAL', payload: json})
             }
         }
 
