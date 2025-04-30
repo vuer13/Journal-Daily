@@ -19,7 +19,7 @@ const Home = () => {
         }
 
         fetchEntry();
-    }, []);
+    }, [dispatch]);
 
   return (
     <div className='Journals'>
