@@ -18,16 +18,17 @@ const Entry = () => {
 
     const [title, setTitle] = useState('');
     const [entry, setEntry] = useState('');
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState('');
     const [summary, setSummary] = useState('');
     const [error, setError] = useState(null);
+    const [empty, setEmpty] = useState([])
 
     const submit = async (e) => {
         e.preventDefault();
 
         const journalEntry = { title, entry, rating, summary }
 
-        const response = await fetch('http://localhost:4000/api/journals', {
+        const response = await fetch('/api/journals', {
             method: "POST",
             body: JSON.stringify(journalEntry),
             headers: {
@@ -41,13 +42,15 @@ const Entry = () => {
 
         if (!response.ok) {
             setError(json.error)
+            setEmpty(json.empty)
         }
         if (response.ok) {
             setTitle('')
             setEntry('')
-            setRating(0)
+            setRating('')
             setSummary('')
             setError(null)
+            setEmpty([])
             console.log("new journal added", json)
             dispatch({ type: 'CREATE_JOURNAL', payload: json })
         }
@@ -66,6 +69,7 @@ const Entry = () => {
                         name='title'
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
+                        className={empty.includes('title') ? 'error' : ''}
                     /> <br></br>
                     <label for='entry'>What happened today? </label>
                     <textarea id='entry'
@@ -76,6 +80,7 @@ const Entry = () => {
                         tabindex="1"
                         value={entry}
                         onChange={(e) => setEntry(e.target.value)}
+                        className={empty.includes('entry') ? 'error' : ''}
                     /> <br></br>
                     <label for='rating'>What do you rate today (Out of 10)? </label>
                     <input type='number'
@@ -86,6 +91,7 @@ const Entry = () => {
                         required
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}
+                        className={empty.includes('rating') ? 'error' : ''}
                     /> <br></br>
                     <label for='summary'>One Sentence to describe today: </label>
                     <input type='text'
@@ -94,6 +100,7 @@ const Entry = () => {
                         name='summary'
                         value={summary}
                         onChange={(e) => setSummary(e.target.value)}
+                        className={empty.includes('summary') ? 'error' : ''}
                     /> <br></br>
                     <input type="submit" class='submit' value='Submit Entry' />
 

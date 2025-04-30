@@ -29,6 +29,25 @@ const getOneJournal = async(req, res) => {
 const createJournal = async (req, res) => {
     const { title, entry, rating, summary } = req.body;
 
+    let empty = []
+
+    if (!title) {
+        empty.push('title')
+    }
+    if (!entry) {
+        empty.push('entry')
+    }
+    if (!rating) {
+        empty.push('rating')
+    }
+    if (!summary) {
+        empty.push('summary')
+    }
+    
+    if(empty.length > 0) {
+        return res.status(400).json({ error: 'Please fill in all the fields', empty})
+    }
+
     try {
         // Create new journal entry
         const journalEntry = await journals.create({

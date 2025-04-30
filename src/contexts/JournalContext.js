@@ -3,6 +3,7 @@ import { createContext, useReducer } from "react";
 export const JournalContext = createContext()
 
 export const journalReducer = (state, action) => {
+
     switch (action.type) {
         case 'SET_JOURNAL':
             return {
@@ -11,6 +12,10 @@ export const journalReducer = (state, action) => {
         case 'CREATE_JOURNAL':
             return {
                 journal: [action.payload, ...state.journal]
+            } 
+        case 'DELETE_JOURNAL':
+            return {
+                journal: state.journal.filter((j) => j._id !== action.payload._id)
             }
         default:
             return state

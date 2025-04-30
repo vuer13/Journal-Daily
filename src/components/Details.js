@@ -1,10 +1,25 @@
 import './Home/Home.css'
 import { Link } from 'react-router-dom';
+import { useJournalContext } from '../hooks/useJournalContext';
 
 const Details = ({ journal }) => {
 
+    const { dispatch } = useJournalContext()
+
     const date = new Date(journal.createdAt);
     const formattedDate = date.toISOString().split('T')[0];
+
+    const handleClick = async () => {
+        const response = await fetch('/api/journals/' + journal._id, {
+            method: 'DELETE'
+        })
+        const json = await response.json()
+
+        if (response.ok) {
+            dispatch({ type: 'DELETE_JOURNAL', payload: json })
+        }
+    }
+
 
     return (
         <div className="details">
@@ -27,10 +42,8 @@ const Details = ({ journal }) => {
                 <p className="end">
                     Created on: {formattedDate}
                 </p>
-                <div className='links'>
-                    <Link to="/delete">Delete</Link>
-                    <Link to="/view">View</Link>
-                </div>
+                <button onClick={handleClick}>Delete</button>
+                <Link to="/view">View</Link>
             </ div>
         </div>
     )
