@@ -6,8 +6,8 @@ export const useLogin = () => {
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
 
-    const login = async (email, passowrd) => {
-        isLoading(true)
+    const login = async (email, password) => {
+        setIsLoading(true)
         setError(null)
 
         const response = await fetch('/api/user/login', {

@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import {useLogout} from '../../hooks/useLogout'
+import { useLogout } from '../../hooks/useLogout'
+import { useAuthContext } from '../../hooks/useAuthContext'
 import "./NavBar.css";
 
 const NavBar = () => {
 
-    const {logout} = useLogout()
+    const { logout } = useLogout()
+    const { user } = useAuthContext()
 
     const handleClick = () => {
         logout()
@@ -16,20 +18,21 @@ const NavBar = () => {
             <h1>
                 The Journal App
             </h1>
-            <div className='links'>
+            {user && (<div className='links'>
                 <Link to="/">Home</Link>
                 <Link to="/create" style={{
                     color: 'white',
                     backgroundColor: 'blue',
                     borderRadius: '8px'
                 }}>Create New Entry</Link>
+                <button onClick={handleClick}>
+                    Logout
+                </button>
+            </div>)}
+            {!user && (<div>
                 <Link to="/login">Login</Link>
-                <div>
-                    <button onClick={handleClick}>
-                        Logout
-                    </button>
-                </div>
-            </div>
+                <Link to="/signup">Sign Up</Link>
+            </div>)}
         </nav>
     )
 }

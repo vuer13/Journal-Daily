@@ -6,8 +6,10 @@ const {
     deleteJournal,
     updateJournal
 } = require('../controller/journalController');
+const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router();
+router.use(requireAuth)
 
 // Define the routes properly
 router.get('/', getAllJournals);  // GET /api/journals

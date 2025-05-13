@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import "./Entry.css";
 import { useJournalContext } from '../../hooks/useJournalContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const Entry = () => {
 
@@ -15,6 +16,7 @@ const Entry = () => {
     }, []);
 
     const { dispatch } = useJournalContext()
+    const { user } = useAuthContext()
 
     const [title, setTitle] = useState('');
     const [entry, setEntry] = useState('');
@@ -26,13 +28,19 @@ const Entry = () => {
     const submit = async (e) => {
         e.preventDefault();
 
+        if (!user) {
+            setError('Must be logged in')
+            return
+        }
+
         const journalEntry = { title, entry, rating, summary }
 
         const response = await fetch('/api/journals', {
             method: "POST",
             body: JSON.stringify(journalEntry),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }
         });
 

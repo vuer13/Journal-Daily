@@ -1,17 +1,25 @@
 import './Home/Home.css'
 import { Link } from 'react-router-dom';
 import { useJournalContext } from '../hooks/useJournalContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Details = ({ journal }) => {
 
     const { dispatch } = useJournalContext()
+    const { user } = useAuthContext()
 
     const date = new Date(journal.createdAt);
     const formattedDate = date.toISOString().split('T')[0];
 
     const handleClick = async () => {
+        if (!user) {
+            return
+        }
         const response = await fetch('/api/journals/' + journal._id, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
         })
         const json = await response.json()
 

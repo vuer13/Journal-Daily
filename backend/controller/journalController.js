@@ -2,24 +2,26 @@ const journals = require('../models/journals')
 const mongoose = require('mongoose')
 
 // get all journals
-const getAllJournals = async(req, res) => {
-    const allJournals = await journals.find({}).sort({createdAt: -1});
+const getAllJournals = async (req, res) => {
+    const user_id = req.user._id
+
+    const allJournals = await journals.find({ user_id }).sort({ createdAt: -1 });
 
     res.status(200).json(allJournals);
 }
 
 // get one journal
-const getOneJournal = async(req, res) => {
-    const {id} = req.params
+const getOneJournal = async (req, res) => {
+    const { id } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({mssg: "No such work"})
+        return res.status(404).json({ mssg: "No such work" })
     }
 
     const journal = await journals.findById(id)
 
     if (!journal) {
-        return res.status(404).json({mssg: "No such journal"})
+        return res.status(404).json({ mssg: "No such journal" })
     }
 
     res.status(200).json(journal)
@@ -43,18 +45,20 @@ const createJournal = async (req, res) => {
     if (!summary) {
         empty.push('summary')
     }
-    
-    if(empty.length > 0) {
-        return res.status(400).json({ error: 'Please fill in all the fields', empty})
+
+    if (empty.length > 0) {
+        return res.status(400).json({ error: 'Please fill in all the fields', empty })
     }
 
     try {
         // Create new journal entry
+        const user_id = req.user._id
         const journalEntry = await journals.create({
             title,
-            entry,     
+            entry,
             rating,
-            summary 
+            summary,
+            user_id
         });
 
         // Send a successful response
@@ -67,36 +71,36 @@ const createJournal = async (req, res) => {
 };
 
 // delete a entry
-const deleteJournal = async(req, res) => {
-    const {id} = req.params
+const deleteJournal = async (req, res) => {
+    const { id } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({mssg: "No such work"})
+        return res.status(404).json({ mssg: "No such work" })
     }
 
-    const journal = await journals.findOneAndDelete({_id: id})
+    const journal = await journals.findOneAndDelete({ _id: id })
 
     if (!journal) {
-        return res.status(404).json({mssg: "No such journal"})
+        return res.status(404).json({ mssg: "No such journal" })
     }
 
     res.status(200).json(journal)
 }
 
 // update journal
-const updateJournal = async(req, res) => {
-    const {id} = req.params
+const updateJournal = async (req, res) => {
+    const { id } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({mssg: "No such work"})
+        return res.status(404).json({ mssg: "No such work" })
     }
 
-    const journal = await journals.findOneAndUpdate({_id: id}, {
+    const journal = await journals.findOneAndUpdate({ _id: id }, {
         ...req.body
     })
 
     if (!journal) {
-        return res.status(404).json({mssg: "No such journal"})
+        return res.status(404).json({ mssg: "No such journal" })
     }
 
     res.status(200).json(journal)

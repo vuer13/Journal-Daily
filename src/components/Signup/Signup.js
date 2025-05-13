@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useSignup } from "../../hooks/useSignup"
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
     const [email, setEmail] = useState('')
