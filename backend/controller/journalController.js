@@ -53,6 +53,7 @@ const createJournal = async (req, res) => {
     try {
         // Create new journal entry
         const user_id = req.user._id
+        console.log(req.user)
         const journalEntry = await journals.create({
             title,
             entry,
@@ -66,7 +67,7 @@ const createJournal = async (req, res) => {
     } catch (error) {
         // Send an error response if something goes wrong
         res.status(400).json({ error: error.message });
-        console.log("error here");
+        console.log("Journal creation error:", error);
     }
 };
 

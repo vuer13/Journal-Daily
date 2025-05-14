@@ -77,7 +77,7 @@ const Entry = () => {
                         name='title'
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className={empty.includes('title') ? 'error' : ''}
+                        className={empty?.includes('title') ? 'title error' : ''}
                     /> <br></br>
                     <label for='entry'>What happened today? </label>
                     <textarea id='entry'
@@ -88,7 +88,7 @@ const Entry = () => {
                         tabindex="1"
                         value={entry}
                         onChange={(e) => setEntry(e.target.value)}
-                        className={empty.includes('entry') ? 'error' : ''}
+                        className={empty?.includes('entry') ? 'entry error' : ''}
                     /> <br></br>
                     <label for='rating'>What do you rate today (Out of 10)? </label>
                     <input type='number'
@@ -99,7 +99,7 @@ const Entry = () => {
                         required
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}
-                        className={empty.includes('rating') ? 'error' : ''}
+                        className={empty?.includes('rating') ? 'rating error' : ''}
                     /> <br></br>
                     <label for='summary'>One Sentence to describe today: </label>
                     <input type='text'
@@ -108,10 +108,9 @@ const Entry = () => {
                         name='summary'
                         value={summary}
                         onChange={(e) => setSummary(e.target.value)}
-                        className={empty.includes('summary') ? 'error' : ''}
+                        className={empty?.includes('summary') ? 'summary error' : ''}
                     /> <br></br>
                     <input type="submit" class='submit' value='Submit Entry' />
-
                 </form>
             </div>
         </div>

@@ -51,7 +51,7 @@ const Details = ({ journal }) => {
                     Created on: {formattedDate}
                 </p>
                 <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
-                <Link to="/view">View</Link>
+                <Link to={`/view/${journal._id}`}>View</Link>
             </ div>
         </div>
     )
