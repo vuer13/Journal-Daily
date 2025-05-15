@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes/routes.js')
 const userRoutes = require('./routes/user.js') 
+const groqRoutes = require('./routes/groq.js');
 const cors = require('cors');
 
 // express app
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 // For routing
 app.use('/api/journals', routes);
 app.use('/api/user', userRoutes);
+app.use('/api/groq', groqRoutes);
 
 // connect to db
 mongoose.connect(process.env.MONG_URI)

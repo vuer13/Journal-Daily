@@ -64,6 +64,28 @@ const Entry = () => {
         }
     }
 
+    const generateSummary = async () => {
+        setSummary('')
+        if (!entry) {
+            setError('Please write something first')
+            return
+        }
+
+        const response = await fetch('/api/groq/generate-summary', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ entry })
+        })
+
+        const data = await response.json()
+
+        if (response.ok) {
+            setSummary(data.summary)
+        } else {
+            setError("Could not generate summary")
+        }
+    }
+
     return (
         <div className='entry'>
             <div className='entryAfter'>
@@ -102,6 +124,7 @@ const Entry = () => {
                         className={empty?.includes('rating') ? 'rating error' : ''}
                     /> <br></br>
                     <label for='summary'>One Sentence to describe today: </label>
+                    <button type="button" onClick={generateSummary}>Generate Summary</button>
                     <input type='text'
                         required
                         id='summary'
