@@ -86,56 +86,77 @@ const Entry = () => {
         }
     }
 
+    const generateTitle = async () => {
+        setTitle('')
+        if (!entry) {
+            setError('Please write something first')
+            return
+        }
+
+        const response = await fetch('/api/groq/generate-title', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ entry })
+        })
+
+        const data = await response.json()
+
+        if (response.ok) {
+            setTitle(data.summary)
+        } else {
+            setError("Could not generate summary")
+        }
+    }
+
     return (
         <div className='entry'>
-            <div className='entryAfter'>
-                <h1 className='title'>Add a Journal Entry: </h1>
-                <p className='date' id="date">Date: {date} </p>
-                <form onSubmit={submit}>
-                    <label for='title'>Title for today: </label>
-                    <input type='text'
-                        required
-                        id='title'
-                        name='title'
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        className={empty?.includes('title') ? 'title error' : ''}
-                    /> <br></br>
-                    <label for='entry'>What happened today? </label>
-                    <textarea id='entry'
-                        required
-                        name='entry'
-                        rows='10'
-                        cols='100'
-                        tabindex="1"
-                        value={entry}
-                        onChange={(e) => setEntry(e.target.value)}
-                        className={empty?.includes('entry') ? 'entry error' : ''}
-                    /> <br></br>
-                    <label for='rating'>What do you rate today (Out of 10)? </label>
-                    <input type='number'
-                        id='rating'
-                        name='rating'
-                        min='0'
-                        max='10'
-                        required
-                        value={rating}
-                        onChange={(e) => setRating(e.target.value)}
-                        className={empty?.includes('rating') ? 'rating error' : ''}
-                    /> <br></br>
-                    <label for='summary'>One Sentence to describe today: </label>
-                    <button type="button" onClick={generateSummary}>Generate Summary</button>
-                    <input type='text'
-                        required
-                        id='summary'
-                        name='summary'
-                        value={summary}
-                        onChange={(e) => setSummary(e.target.value)}
-                        className={empty?.includes('summary') ? 'summary error' : ''}
-                    /> <br></br>
-                    <input type="submit" class='submit' value='Submit Entry' />
-                </form>
-            </div>
+            <h1 className='title'>Add a Journal Entry: </h1>
+            <p className='date' id="date">Date: {date} </p>
+            <form onSubmit={submit}>
+                <label for='entry'>What happened today? </label>
+                <textarea id='entry'
+                    required
+                    name='entry'
+                    rows='10'
+                    cols='100'
+                    tabindex="1"
+                    value={entry}
+                    onChange={(e) => setEntry(e.target.value)}
+                    className={empty?.includes('entry') ? 'entry error' : ''}
+                /> <br></br>
+                <label for='title'>Title for today: </label>
+                <button className='groq' type="button" onClick={generateTitle}>Generate Title</button>
+                <input type='text'
+                    required
+                    id='title'
+                    name='title'
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className={empty?.includes('title') ? 'title error' : ''}
+                /> <br></br>
+                <label for='summary'>One Sentence to describe today: </label>
+                <button className='groq' type="button" onClick={generateSummary}>Generate Summary</button>
+                <input type='text'
+                    required
+                    id='summary'
+                    name='summary'
+                    value={summary}
+                    onChange={(e) => setSummary(e.target.value)}
+                    className={empty?.includes('summary') ? 'summary error' : ''}
+                /> <br></br>
+                <label for='rating'>What do you rate today (Out of 10)? </label>
+                <input type='number'
+                    id='rating'
+                    name='rating'
+                    min='0'
+                    max='10'
+                    required
+                    value={rating}
+                    onChange={(e) => setRating(e.target.value)}
+                    className={empty?.includes('rating') ? 'rating error' : ''}
+                /> <br></br>
+                <input type="submit" class='submit' value='Submit Entry' />
+            </form>
         </div>
     )
 }

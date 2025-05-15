@@ -15,6 +15,7 @@ nav {
 .nav h1 {
     color: rgb(21, 50, 146);
     vertical-align: middle;
+    margin-top: 4px;
 }
 .nav .links {
     margin-left: auto;
@@ -28,4 +29,17 @@ nav {
 }
 .nav a:hover {
     color: #b70f39;
+}
+.nav button {
+    margin-right: 30px;
+    margin-left: 20px;
+    background-color: rgb(53, 166, 222);
+    border: none;
+    font-size: 16px;
+    color: #2743d1;
+    cursor: pointer;
+    padding: 8px 20px;
+}
+.nav button:hover {
+    background-color: #67e687;
   }

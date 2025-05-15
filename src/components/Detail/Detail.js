@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { Link } from "react-router-dom";
+import './Detail.css'
 
 export const Detail = () => {
     const { id } = useParams()
@@ -31,12 +33,13 @@ export const Detail = () => {
     if (!journal) return <div>Loading...</div>
     
     return (
-        <div className="journal-one">
+        <div className="journal">
           <h2>{journal.title}</h2>
-          <p><strong>Rating:</strong> {journal.rating}</p>
-          <p><strong>Summary:</strong> {journal.summary}</p>
-          <p><strong>Entry:</strong> {journal.entry}</p>
           <p><em>Created: {new Date(journal.createdAt).toLocaleString()}</em></p>
+          <p><strong>Entry:</strong> {journal.entry}</p>
+          <p><strong>Summary:</strong> {journal.summary}</p>
+          <p><strong>Rating:</strong> {journal.rating}/10</p>
+          <Link className='link' to={'/' + id}>Edit Entry</Link>
         </div>
       )
 }

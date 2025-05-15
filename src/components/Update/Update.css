@@ -5,28 +5,28 @@
     padding: 0;
     font-family: 'Poppins';
 }
-.entry {
+.update {
     padding: 0;
     margin: 0;
     justify-content: space-around;
     border-bottom: 10px;
     position: relative;
 }
-.entry .title {
+.update .title {
     display: inline-block;
     margin-left: 150px;
     margin-top: 20px;
     font-size: 50px;
 }
-.entry form {
+.update form {
     padding: 10px;
 }
-.entry label {
+.update label {
     padding-bottom: 1px;
     float: left;
     font-size: 20px;
 }
-.entry textarea {
+.update textarea {
     width: 100%;
     padding: 6px 8px;
     margin: 10px 0;
@@ -37,7 +37,7 @@
     resize: none;
     font-size: 16px;
 }
-.entry input {
+.update input {
     width: 100%;
     font-size: 16px;
     padding: 6px 10px;
@@ -46,17 +46,17 @@
     box-sizing: border-box;
     display: inline-block;
 }
-.entry p {
+.update p {
     float: right;
     margin-right: 10px;
 }
-.entry .date {
+.update .date {
     font-size: 20px;
     float: right;
     padding: 16px;
 }
 
-.entry .groq {
+.update .groq {
     float: right;
     margin-right: 2px;
     font-weight: bold;
@@ -67,6 +67,6 @@
     color: white;
 }
 
-.entry .submit {
+.update .update {
     background-color: #c8dbe8;
 }

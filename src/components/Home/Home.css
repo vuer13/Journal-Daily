@@ -1,17 +1,22 @@
 .details .main {
     text-align: left;
     line-height: 1.5;
-    margin-left: 20px;
-    margin-top: 10px;
+    margin-left: 10px;
+    vertical-align: middle;
 }
 
 .details .right{
     text-align: right;
-    margin-top: 10px;
 }
 
 .details {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-right: 20px;
+    border: 5px solid #ccc;
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin: 12px;
+    background-color: #f9f9f9;
 }

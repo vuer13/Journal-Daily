@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import './Update.css'
 
 export const Update = () => {
 
@@ -68,9 +69,53 @@ export const Update = () => {
         const json = await response.json();
 
         if (!response.ok) {
-          setError(json.error);
+            setError(json.error);
         } else {
-          navigate(`/view/${id}`);
+            navigate(`/view/${id}`);
+        }
+    }
+
+    const generateSummary = async () => {
+        setSummary('')
+        if (!entry) {
+            setError('Please write something first')
+            return
+        }
+
+        const response = await fetch('/api/groq/generate-summary', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ entry })
+        })
+
+        const data = await response.json()
+
+        if (response.ok) {
+            setSummary(data.summary)
+        } else {
+            setError("Could not generate summary")
+        }
+    }
+
+    const generateTitle = async () => {
+        setTitle('')
+        if (!entry) {
+            setError('Please write something first')
+            return
+        }
+
+        const response = await fetch('/api/groq/generate-title', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ entry })
+        })
+
+        const data = await response.json()
+
+        if (response.ok) {
+            setTitle(data.summary)
+        } else {
+            setError("Could not generate summary")
         }
     }
 
@@ -81,16 +126,7 @@ export const Update = () => {
                 {error && <div>{error}</div>}
                 <p className='date' id="date">Date: {date} </p>
                 <form onSubmit={submit}>
-                    <label for='title'>Title for today: </label>
-                    <input type='text'
-                        required
-                        id='title'
-                        name='title'
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        className={empty?.includes('title') ? 'title error' : ''}
-                    /> <br></br>
-                    <label for='entry'>What happened today? </label>
+                    <label for='entry'>Updated Entry </label>
                     <textarea id='entry'
                         required
                         name='entry'
@@ -101,7 +137,27 @@ export const Update = () => {
                         onChange={(e) => setEntry(e.target.value)}
                         className={empty?.includes('entry') ? 'entry error' : ''}
                     /> <br></br>
-                    <label for='rating'>What do you rate today (Out of 10)? </label>
+                    <label for='title'>Updated Title: </label>
+                    <button className='groq' type="button" onClick={generateTitle}>Generate Title</button>
+                    <input type='text'
+                        required
+                        id='title'
+                        name='title'
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        className={empty?.includes('title') ? 'title error' : ''}
+                    /> <br></br>
+                    <label for='summary'>One Sentence to describe event: </label>
+                    <button className='groq' type="button" onClick={generateSummary}>Generate Summary</button>
+                    <input type='text'
+                        required
+                        id='summary'
+                        name='summary'
+                        value={summary}
+                        onChange={(e) => setSummary(e.target.value)}
+                        className={empty?.includes('summary') ? 'summary error' : ''}
+                    /> <br></br>
+                    <label for='rating'>Updated Rating (Out of 10)? </label>
                     <input type='number'
                         id='rating'
                         name='rating'
@@ -111,15 +167,6 @@ export const Update = () => {
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}
                         className={empty?.includes('rating') ? 'rating error' : ''}
-                    /> <br></br>
-                    <label for='summary'>One Sentence to describe today: </label>
-                    <input type='text'
-                        required
-                        id='summary'
-                        name='summary'
-                        value={summary}
-                        onChange={(e) => setSummary(e.target.value)}
-                        className={empty?.includes('summary') ? 'summary error' : ''}
                     /> <br></br>
                     <input type="submit" class='update' value='Update Entry' />
                 </form>

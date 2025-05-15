@@ -26,4 +26,28 @@ const groqSummary = async (req, res) => {
     }
 }
 
-module.exports = { groqSummary }
+const groqTitle = async (req, res) => {
+    const { entry } = req.body;
+
+    if (!entry) {
+        return res.status(400).json({ error: 'Entry is required' });
+    }
+
+    try {
+        const getGroqChatCompletion = await groq.chat.completions.create({
+            model: "llama-3.3-70b-versatile",
+            messages: [
+                { role: 'system', content: 'You title journal entries.' },
+                { role: 'user', content: `Generate the title for this journal entry, please do not include quotation marks in the title :\n\n${entry}` },
+            ],
+        })
+
+        const summary = getGroqChatCompletion.choices[0].message.content.trim();
+        res.status(200).json({ summary });
+    } catch (err) {
+        console.error('GROQ summary error:', err.message);
+        res.status(500).json({ error: 'Failed to generate summary.' });
+    }
+}
+
+module.exports = { groqSummary, groqTitle }

@@ -25,7 +25,7 @@ const NavBar = () => {
                     backgroundColor: 'blue',
                     borderRadius: '8px'
                 }}>Create New Entry</Link>
-                <button onClick={handleClick}>
+                <button onClick={handleClick} style={{borderRadius: '8px'}}>
                     Logout
                 </button>
             </div>)}

@@ -1,0 +1,23 @@
+.journal {
+    text-align: left;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+.journal h2 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.journal p {
+    font-size: 20px;
+}
+
+.journal .link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: rgb(21, 50, 146);
+    font-size: 20px;
+    margin-top: 20px;
+}

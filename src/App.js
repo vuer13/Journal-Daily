@@ -4,7 +4,7 @@ import Home from './components/Home/Home';
 import Entry from './components/Entry/Entry';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
-import Detail from './components/Detail';
+import Detail from './components/Detail/Detail';
 import Update from './components/Update/Update'
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { useAuthContext } from './hooks/useAuthContext';

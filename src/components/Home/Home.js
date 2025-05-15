@@ -31,7 +31,7 @@ const Home = () => {
   return (
     <div className='Journals'>
         {journal && journal.map((journal) => (
-            <JournalDetails key={journal._id} journal={journal} />
+            <JournalDetails className="detail" key={journal._id} journal={journal} />
         ))}
     </div>
   )
