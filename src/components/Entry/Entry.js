@@ -71,6 +71,8 @@ const Entry = () => {
             return
         }
 
+        setError(null)
+
         const response = await fetch('/api/groq/generate-summary', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -93,6 +95,8 @@ const Entry = () => {
             return
         }
 
+        setError(null)
+
         const response = await fetch('/api/groq/generate-title', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -110,6 +114,7 @@ const Entry = () => {
 
     return (
         <div className='entry'>
+            {error && <div className='error'>{error}</div>}
             <h1 className='title'>Add a Journal Entry: </h1>
             <p className='date' id="date">Date: {date} </p>
             <form onSubmit={submit}>

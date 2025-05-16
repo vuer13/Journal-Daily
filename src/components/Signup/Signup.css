@@ -1,0 +1,86 @@
+.signup h3 {
+    font-size: 50px;
+    margin-top: 0;
+    margin-bottom: 0px;
+    text-align: left;
+}
+
+.signup {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 400px;
+    margin: 80px auto;
+    border: 2px solid;
+    border-color: black;
+    border-radius: 20px;
+    gap: 10px;
+    padding: 40px 50px 40px 40px;
+}
+
+.page {
+    background-image: linear-gradient(to bottom, rgb(71, 33, 225), rgb(22, 112, 185));
+    height: 86vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup label {
+    text-align: left;
+    font-size: 20px;
+}
+
+.signup .links {
+    margin-top: 20px;
+}
+
+.signup input {
+    width: 100%;
+    font-size: 16px;
+    padding: 2px 2px;
+    border-radius: 4px;
+    border: 2px solid #0eaab3;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.signup button {
+    width: 100%;
+    border: 2px solid #0eaab3;
+    padding: 4px;
+    box-sizing: border-box;
+    display: inline-block;
+    border-radius: 100px;
+    resize: none;
+    font-size: 16px;
+    color: rgb(36, 6, 228);
+    background-color: #68f2eb;
+}
+
+.signup button {
+    margin-bottom: 15px;
+}
+
+.signup .components {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.signup .log-in {
+    text-align: center;
+    gap: 10px;
+}
+
+.error {
+    color: red;
+    background-color: #ffe6e6;
+    padding: 5px;
+    border: 1px solid red;
+    border-radius: 4px;
+    margin-top: 10px;
+    text-align: center;
+}

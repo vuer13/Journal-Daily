@@ -81,6 +81,7 @@ export const Update = () => {
             setError('Please write something first')
             return
         }
+        setError(null)
 
         const response = await fetch('/api/groq/generate-summary', {
             method: 'POST',
@@ -103,6 +104,7 @@ export const Update = () => {
             setError('Please write something first')
             return
         }
+        setError(null)
 
         const response = await fetch('/api/groq/generate-title', {
             method: 'POST',
@@ -121,6 +123,7 @@ export const Update = () => {
 
     return (
         <div className='update'>
+            {error && <div className='error'>{error}</div>}
             <div className='entryAfter'>
                 <h1 className='title'>Edit Journal Entry: </h1>
                 {error && <div>{error}</div>}
