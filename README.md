@@ -10,3 +10,31 @@ This project allows users to create journal entries daily to write, upload and m
 - Auto-generated titles and summaries based on the journal entry using Groq
 
 This project utilized React.js, Node.js, Express.js, MongoDB, Groq, and JWT.
+
+## Setup
+Clone the repository and install dependencies:
+```bash
+git clone https://github.com/your-username/journal-app.git
+cd journal-app
+npm install
+```
+Create a .env file for the following:
+```bash
+PORT=4000 # for the backend
+MONG_URI=your_mongo_uri
+SECRET=your_jwt_secret
+GROQ_API_KEY=your_groq_api_key
+```
+Start Development:
+- Backend
+```bash
+cd backend
+npm run dev
+```
+- Frontend
+```bash
+npm start
+```
+
+## Next Steps
+To deploy the application, creating analytics for journal habits, and cloud storage for PDF files
